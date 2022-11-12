@@ -1,0 +1,97 @@
+{
+  "project_info": {
+    "project_number": "415052255713",
+    "project_id": "ppaapp-5d413",
+    "storage_bucket": "ppaapp-5d413.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:415052255713:android:eae0f87d80c663a28d42a0",
+        "android_client_info": {
+          "package_name": "com.celiao.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "415052255713-l2mgs3tbgpna3vh6nla2jviusub797v0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDB-tMmHbm81Ij_5LwxZXcJVGRFtFWUcw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "415052255713-l2mgs3tbgpna3vh6nla2jviusub797v0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:415052255713:android:19012fbeaa150a448d42a0",
+        "android_client_info": {
+          "package_name": "com.celiao.carApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "415052255713-l2mgs3tbgpna3vh6nla2jviusub797v0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDB-tMmHbm81Ij_5LwxZXcJVGRFtFWUcw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "415052255713-l2mgs3tbgpna3vh6nla2jviusub797v0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:415052255713:android:4946dbedf0721aeb8d42a0",
+        "android_client_info": {
+          "package_name": "com.example.carapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "415052255713-l2mgs3tbgpna3vh6nla2jviusub797v0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDB-tMmHbm81Ij_5LwxZXcJVGRFtFWUcw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "415052255713-l2mgs3tbgpna3vh6nla2jviusub797v0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/activity_customer_booking_details.xml" value="0.33" />
+        <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/activity_customer_home.xml" value="0.21568627450980393" />
+        <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/activity_driver_home.xml" value="0.33" />
+        <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/activity_home.xml" value="0.1" />
+        <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/activity_sign_up.xml" value="0.33" />
+        <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/activity_vehicle_owner.xml" value="0.3484375" />
+        <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/activity_view_vehicles.xml" value="0.1" />
+        <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/activity_view_vehicles_vehicle.xml" value="0.1" />
+        <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/fragment_customer_booking.xml" value="0.33" />
+        <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/fragment_customer_booking_booked.xml" value="0.33" />
+        <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/fragment_customer_home.xml" value="0.1" />
+        <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/fragment_customer_home_booked.xml" value="0.1" />
+        <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/fragment_customer_profile.xml" value="0.33" />
+        <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
