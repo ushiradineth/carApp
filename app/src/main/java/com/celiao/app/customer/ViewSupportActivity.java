@@ -11,6 +11,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
@@ -36,7 +38,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -128,6 +133,8 @@ public class ViewSupportActivity extends AppCompatActivity {
 
                                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+
+
                                     //creating the address hashmap to extract the necessary info from the address list
                                     Map<String, Object> Address = new HashMap<>();
                                     Address.put("email", email);
@@ -141,19 +148,31 @@ public class ViewSupportActivity extends AppCompatActivity {
                                     Address.put("latitude", String.valueOf(latitude));
                                     Address.put("breakdownDate", formatter.format(LocalDate.now()));
 
-                                    //updating a breakdown record in the database
-                                    FirebaseFirestore.getInstance().collection("breakdowns").document(email).set(Address)
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void unused) {
-                                                    Toast.makeText(getApplicationContext(), "Your location has been sent!", Toast.LENGTH_LONG).show();
+                                    //getting vehicle number
+                                    FirebaseFirestore.getInstance().collection("bookings").document(email).get()
+                                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                DocumentSnapshot doc = task.getResult();
+                                                if (doc.exists()) {
+                                                    Address.put("vehicle", doc.getString("vehicle"));
+
+                                                    //updating a breakdown record in the database
+                                                    FirebaseFirestore.getInstance().collection("breakdowns").document(email).set(Address)
+                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void unused) {
+                                                                Toast.makeText(getApplicationContext(), "Your location has been sent!", Toast.LENGTH_LONG).show();
+                                                            }
+                                                        }).addOnFailureListener(new OnFailureListener() {
+                                                            @Override
+                                                            public void onFailure(@NonNull Exception e) {
+                                                                Toast.makeText(getApplicationContext(), "Failed to send your location, please try again.", Toast.LENGTH_LONG).show();
+                                                            }
+                                                        });
                                                 }
-                                            }).addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(getApplicationContext(), "Failed to send your location, please try again.", Toast.LENGTH_LONG).show();
-                                                }
-                                            });
+                                            }
+                                        });
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
