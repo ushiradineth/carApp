@@ -121,6 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                                         editor.putString("email", email.getText().toString());
                                         editor.commit();
                                     }
+
                                     switch (doc.getString("role")){
                                         case "Customer":
                                             Intent Customer = new Intent(getApplicationContext(), HomeActivity.class);

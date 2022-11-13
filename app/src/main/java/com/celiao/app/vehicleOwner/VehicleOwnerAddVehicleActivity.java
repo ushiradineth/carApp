@@ -35,7 +35,7 @@ import com.google.firebase.storage.UploadTask;
 import java.util.HashMap;
 import java.util.Map;
 
-//this page lets admin add new vehicles to the database
+//this page lets vehicle owners add new vehicles to the database
 public class VehicleOwnerAddVehicleActivity extends AppCompatActivity {
     EditText vehicleName, model, description, price, category;
     Button button_addVehicle, button_uploadImage, logout, deleteAccount;
@@ -186,5 +186,10 @@ public class VehicleOwnerAddVehicleActivity extends AppCompatActivity {
                     });
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        this.moveTaskToBack(true);
     }
 }

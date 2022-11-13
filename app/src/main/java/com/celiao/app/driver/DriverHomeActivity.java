@@ -30,6 +30,7 @@ import com.google.firebase.firestore.SetOptions;
 import java.util.HashMap;
 import java.util.Map;
 
+// this is a page a driver sees when they login
 public class DriverHomeActivity extends AppCompatActivity {
     TextView greeting, msg, job, number, date, address, vehicle;
     Switch availability;
@@ -80,6 +81,7 @@ public class DriverHomeActivity extends AppCompatActivity {
         deleteAccount = (Button) findViewById(R.id.button_delete);
         deleteAccount.setVisibility(View.GONE);
 
+        //handling available switch and delete account button
         FirebaseFirestore.getInstance().collection("users").document(email).get()
             .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
@@ -109,30 +111,35 @@ public class DriverHomeActivity extends AppCompatActivity {
                 }
             });
 
+        //handling available switch
         availability.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                //checks if the driver is a booked driver or not, this is the first page driver sees after they login
-                FirebaseFirestore.getInstance().collection("users").document(email).get()
-                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful()) {
-                                DocumentSnapshot document = task.getResult();
-                                if (document.exists() && document.getString("role").equals("Driver")) {
-                                    //changing the vehicle availability to false
-                                    Map<String, Object> temp = new HashMap<>();
-                                    temp.put("isAvailable", String.valueOf(b));
-                                    FirebaseFirestore.getInstance().collection("users").document(email).set(temp, SetOptions.merge());
-                                    if(b) msg.setText("You will get a Request soon!"); else msg.setText("");
 
-                                }
+            //checks if the driver is a booked driver or not, this is the first page driver sees after they login
+            FirebaseFirestore.getInstance().collection("users").document(email).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists() && document.getString("role").equals("Driver")) {
+                                //changing the vehicle availability to false
+                                Map<String, Object> temp = new HashMap<>();
+                                temp.put("isAvailable", String.valueOf(b));
+
+                                //changing availability on the drivers records
+                                FirebaseFirestore.getInstance().collection("users").document(email).set(temp, SetOptions.merge());
+                                if(b) msg.setText("You will get a Request soon!"); else msg.setText("");
+
                             }
                         }
-                    });
+                    }
+                });
             }
         });
 
+        // getting drivers details
         FirebaseFirestore.getInstance().collection("users").document(email).get()
             .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
@@ -141,6 +148,8 @@ public class DriverHomeActivity extends AppCompatActivity {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists() && document.getString("role").equals("Driver")) {
                             if(document.getString("booking") != null){
+
+                                //getting booking details
                                 FirebaseFirestore.getInstance().collection("bookings").document(document.getString("booking")).get()
                                     .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                         @Override
@@ -164,6 +173,7 @@ public class DriverHomeActivity extends AppCompatActivity {
 
                                                     date.setGravity(Gravity.CENTER_VERTICAL);
 
+                                                    //getting customers number
                                                     FirebaseFirestore.getInstance().collection("users").document(document.getString("email")).get()
                                                         .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                                             @Override

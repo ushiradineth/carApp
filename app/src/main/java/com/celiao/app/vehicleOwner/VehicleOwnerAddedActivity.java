@@ -29,6 +29,7 @@ import com.google.firebase.storage.UploadTask;
 import java.util.HashMap;
 import java.util.Map;
 
+// this is the page vehicle owner who have already registered their vehicle sees
 public class VehicleOwnerAddedActivity extends AppCompatActivity {
     Button deleteVehicle, logout;
     TextView vehicle, price, description, category, model, availability, greeting;
@@ -50,6 +51,8 @@ public class VehicleOwnerAddedActivity extends AppCompatActivity {
         String email = intent.getStringExtra("email");
 
         deleteVehicle = (Button) findViewById(R.id.button_delete);
+
+        //getting owners vehicle information
         FirebaseFirestore.getInstance().collection("users").document(email).get()
         .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -58,6 +61,8 @@ public class VehicleOwnerAddedActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     greeting.setText("Hello, " + document.getString("fullName"));
                     if (document.getString("vehicle") != null) {
+
+                        //getting vehicle information
                         FirebaseFirestore.getInstance().collection("vehicles").document(document.getString("vehicle")).get()
                         .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
@@ -76,12 +81,16 @@ public class VehicleOwnerAddedActivity extends AppCompatActivity {
                                         @Override
                                         public void onClick(View view) {
                                             Log.d("TAG", document.getString("vehicle"));
+
+                                            //deleting the vehicle
                                             FirebaseFirestore.getInstance().collection("vehicles").document(document.getString("vehicle")).delete()
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void unused) {
                                                     Map<String, Object> temp = new HashMap<>();
                                                     temp.put("vehicle", null);
+
+                                                    //removing the vehicle from the vehicle owners record
                                                     FirebaseFirestore.getInstance().collection("users").document(email).set(temp, SetOptions.merge());
 
                                                     Intent intent = new Intent(getApplicationContext(), VehicleOwnerAddVehicleActivity.class);
@@ -125,5 +134,10 @@ public class VehicleOwnerAddedActivity extends AppCompatActivity {
                     .show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        this.moveTaskToBack(true);
     }
 }
