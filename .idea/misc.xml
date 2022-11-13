@@ -5,11 +5,14 @@
       <map>
         <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/activity_customer_booking_details.xml" value="0.33" />
         <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/activity_customer_home.xml" value="0.21568627450980393" />
+        <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/activity_driver_add_vehicle.xml" value="0.26358695652173914" />
         <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/activity_driver_home.xml" value="0.33" />
         <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/activity_sign_up.xml" value="0.33" />
         <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/activity_vehicle_owner.xml" value="0.3484375" />
+        <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/activity_vehicle_owner_add_vehicle.xml" value="0.33" />
+        <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/activity_vehicle_owner_added.xml" value="0.3484375" />
         <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/activity_view_vehicles.xml" value="0.1" />
         <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/activity_view_vehicles_vehicle.xml" value="0.1" />
         <entry key="..\:/Users/ushir/AndroidStudioProjects/app/app/src/main/res/layout/fragment_customer_booking.xml" value="0.33" />

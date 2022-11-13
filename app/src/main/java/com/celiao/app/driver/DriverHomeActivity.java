@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.celiao.app.LoginActivity;
 import com.celiao.app.R;
@@ -32,7 +33,7 @@ import java.util.Map;
 public class DriverHomeActivity extends AppCompatActivity {
     TextView greeting, msg, job, number, date, address, vehicle;
     Switch availability;
-    Button logout;
+    Button logout, deleteAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +77,9 @@ public class DriverHomeActivity extends AppCompatActivity {
             }
         });
 
+        deleteAccount = (Button) findViewById(R.id.button_delete);
+        deleteAccount.setVisibility(View.GONE);
+
         FirebaseFirestore.getInstance().collection("users").document(email).get()
             .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
@@ -83,7 +87,23 @@ public class DriverHomeActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists() && document.getString("role").equals("Driver")) {
-                            if(document.getString("isAvailable").equals("true")) availability.setChecked(true);
+                            if(document.getString("isAvailable") != null){
+                                if(document.getString("isAvailable").equals("true")) availability.setChecked(true);
+                            }
+                            if(document.getString("booking") == null){
+                                deleteAccount.setVisibility(View.VISIBLE);
+                                deleteAccount.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        getApplicationContext().getSharedPreferences("shared", 0).edit().clear().commit();
+
+                                        FirebaseFirestore.getInstance().collection("users").document(email).delete();
+                                        Toast.makeText(getApplicationContext(), "User deleted!", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                                        startActivity(intent);
+                                    }
+                                });
+                            }
                         }
                     }
                 }

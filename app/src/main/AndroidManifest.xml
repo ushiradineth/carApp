@@ -17,6 +17,15 @@
         android:theme="@style/Theme.App"
         tools:targetApi="31">
         <activity
+            android:name=".vehicleOwner.VehicleOwnerAddedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".vehicleOwner.VehicleOwnerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".vehicleOwner.VehicleOwnerAddVehicleActivity"
+            android:exported="false" />
+        <activity
             android:name=".customer.ViewVehiclesActivityCustomListView"
             android:exported="false"
             android:label="@string/title_activity_customer_view_vehicles_custom_list_view"
@@ -37,9 +46,6 @@
             android:theme="@style/Theme.App.NoActionBar" />
         <activity
             android:name=".SignUpActivity"
-            android:exported="false" />
-        <activity
-            android:name=".vehicleOwner.VehicleOwnerActivity"
             android:exported="false" />
         <activity
             android:name=".driver.DriverHomeActivity"
