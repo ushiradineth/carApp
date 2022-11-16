@@ -25,6 +25,8 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.concurrent.TimeUnit;
+
 /*
     this page is not visible to the user, this page holds the paths to the 5 fragments
     home, homebooked, booking, bookingbooked, profile
@@ -93,8 +95,13 @@ public class HomeActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
-                            homeBooked.setArguments(bundle);
-                            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, homeBooked).commit();
+                            if(document.getString("email") == null){
+                                home.setArguments(bundle);
+                                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, home).commit();
+                            } else {
+                                homeBooked.setArguments(bundle);
+                                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, homeBooked).commit();
+                            }
                         } else {
                             home.setArguments(bundle);
                             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, home).commit();
@@ -113,22 +120,38 @@ public class HomeActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.isSuccessful()) {
                                 DocumentSnapshot document = task.getResult();
-
                                 //user gets sent to different pages depending on if the user is a booked user or not
                                 if (document.exists()) {
-                                    switch (item.getItemId()){
-                                        case R.id.home:
-                                            homeBooked.setArguments(bundle);
-                                            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame,homeBooked).commit();
-                                            break;
-                                        case R.id.booking:
-                                            bookingBooked.setArguments(bundle);
-                                            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame,bookingBooked).commit();
-                                            break;
-                                        case R.id.profile:
-                                            profile.setArguments(bundle);
-                                            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame,profile).commit();
-                                            break;
+                                    if(document.getString("email") == null){
+                                        switch (item.getItemId()){
+                                            case R.id.home:
+                                                home.setArguments(bundle);
+                                                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame,home).commit();
+                                                break;
+                                            case R.id.booking:
+                                                booking.setArguments(bundle);
+                                                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame,booking).commit();
+                                                break;
+                                            case R.id.profile:
+                                                profile.setArguments(bundle);
+                                                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame,profile).commit();
+                                                break;
+                                        }
+                                    } else {
+                                        switch (item.getItemId()) {
+                                            case R.id.home:
+                                                homeBooked.setArguments(bundle);
+                                                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, homeBooked).commit();
+                                                break;
+                                            case R.id.booking:
+                                                bookingBooked.setArguments(bundle);
+                                                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, bookingBooked).commit();
+                                                break;
+                                            case R.id.profile:
+                                                profile.setArguments(bundle);
+                                                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, profile).commit();
+                                                break;
+                                        }
                                     }
                                 } else {
                                     switch (item.getItemId()){

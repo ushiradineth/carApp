@@ -101,7 +101,7 @@ public class BookingFragment extends Fragment {
                             if(document.getString("role").equals("Driver")) {
                                 //gets the available vehicles
                                 if (document.getString("isAvailable").equals("true")) {
-                                    driverList.add(document.getString("fullName"));
+                                    driverList.add(document.getString("email"));
                                 }
                             }
                         }
@@ -182,7 +182,8 @@ public class BookingFragment extends Fragment {
                             Map<String, Object> temp = new HashMap<>();
                             temp.put("isAvailable", "false");
                             firestore.collection("vehicles").document(vehicles.getSelectedItem().toString()).update(temp);
-                            firestore.collection("drivers").document(drivers.getSelectedItem().toString()).update(temp);
+                            temp.put("booking", email);
+                            firestore.collection("users").document(drivers.getSelectedItem().toString()).update(temp);
 
                             Toast.makeText(getContext(), "Your vehicle has been booked!", Toast.LENGTH_LONG).show();
 

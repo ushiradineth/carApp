@@ -29,6 +29,7 @@ import com.google.firebase.firestore.SetOptions;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 // this is a page a driver sees when they login
 public class DriverHomeActivity extends AppCompatActivity {
@@ -157,7 +158,6 @@ public class DriverHomeActivity extends AppCompatActivity {
                                             if (task.isSuccessful()) {
                                                 DocumentSnapshot document = task.getResult();
                                                 if (document.exists()) {
-                                                    Log.d("asd", "onComplete: here");
                                                     availability.setVisibility(View.GONE);
                                                     msg.setVisibility(View.GONE);
 

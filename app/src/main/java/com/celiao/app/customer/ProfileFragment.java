@@ -65,24 +65,52 @@ public class ProfileFragment extends Fragment {
                 if(task.isSuccessful()){
                     DocumentSnapshot doc = task.getResult();
                     if (doc.exists()) {
-                        btnchoice.setText("See booking");
-                        btnchoice.setVisibility(View.VISIBLE);
-                        btnchoice.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
+                        if(doc.getString("email") != null){
+                            btnchoice.setText("See booking");
+                            btnchoice.setVisibility(View.VISIBLE);
+                            btnchoice.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
 
-                                //changing highlighted icon
-                                BottomNavigationView mBottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
-                                mBottomNavigationView.setSelectedItemId(R.id.booking);
+                                    //changing highlighted icon
+                                    BottomNavigationView mBottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
+                                    mBottomNavigationView.setSelectedItemId(R.id.booking);
 
-                                //sending user to booking fragment
-                                BookingBookedFragment bookingBooked  = new BookingBookedFragment();
-                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, bookingBooked).addToBackStack(null).commit();
-                                Bundle bundle = new Bundle();
-                                bundle.putString("email", email);
-                                bookingBooked.setArguments(bundle);
-                            }
-                        });
+                                    //sending user to booking fragment
+                                    BookingBookedFragment bookingBooked  = new BookingBookedFragment();
+                                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, bookingBooked).addToBackStack(null).commit();
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("email", email);
+                                    bookingBooked.setArguments(bundle);
+                                }
+                            });
+                        } else {
+                            btnchoice.setText("Delete profile");
+                            btnchoice.setVisibility(View.VISIBLE);
+                            btnchoice.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    //double checking if the user wants to logout
+                                    new AlertDialog.Builder(view.getContext())
+                                            .setTitle("Delete account?")
+                                            .setMessage("Are you sure you want to delete your account?")
+                                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    //removing user login information
+                                                    getContext().getSharedPreferences("shared", 0).edit().clear().commit();
+
+                                                    //deleting the user if they dont have a booking
+                                                    FirebaseFirestore.getInstance().collection("users").document(email).delete();
+                                                    Toast.makeText(getContext(), "User deleted!", Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                                                    startActivity(intent);
+                                                }
+                                            })
+                                            .setNegativeButton(android.R.string.no, null)
+                                            .show();
+                                }
+                            });
+                        }
                     } else {
                         btnchoice.setText("Delete profile");
                         btnchoice.setVisibility(View.VISIBLE);
