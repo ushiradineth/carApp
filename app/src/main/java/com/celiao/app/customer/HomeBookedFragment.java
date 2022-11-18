@@ -77,7 +77,13 @@ public class HomeBookedFragment extends Fragment {
                             //comparing the dates
                             long diff = end.getTime() - start.getTime();
 
-                            textView_bookingDaysLeft.setText(String.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS))+" days left on your current booking.");
+                            long days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+
+                            if (days > 0) {
+                                textView_bookingDaysLeft.setText(String.valueOf(days)+" days left on your current booking.");
+                            } else {
+                                textView_bookingDaysLeft.setText("Your booking ends today!");
+                            }
 
                         } catch (ParseException e) {
                             e.printStackTrace();
