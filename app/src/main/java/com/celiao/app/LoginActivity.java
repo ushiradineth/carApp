@@ -248,11 +248,6 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
-                try {
-                    TimeUnit.SECONDS.sleep(2);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 Intent Customer = new Intent(getApplicationContext(), HomeActivity.class);
                 Customer.putExtra("email", email);
                 startActivity(Customer);
@@ -264,28 +259,25 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             DocumentSnapshot doc1 = task.getResult();
                             if (doc1.exists()) {
-                                FirebaseFirestore.getInstance().collection("bookings").document(doc1.getString("booking")).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                        if (task.isSuccessful()) {
-                                            DocumentSnapshot document = task.getResult();
-                                            if (document.exists()) {
-                                                if (document.getString("email") != null) {
-                                                    dbUpdate(document);
+                                if(doc1.getString("booking") != null){
+                                    FirebaseFirestore.getInstance().collection("bookings").document(doc1.getString("booking")).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                DocumentSnapshot document = task.getResult();
+                                                if (document.exists()) {
+                                                    if (document.getString("email") != null) {
+                                                        dbUpdate(document);
+                                                    }
                                                 }
                                             }
                                         }
-                                    }
-                                });
+                                    });
+                                }
                             }
                         }
                     }
                 });
-                try {
-                    TimeUnit.SECONDS.sleep(2);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 Intent Driver = new Intent(getApplicationContext(), DriverHomeActivity.class);
                 Driver.putExtra("email", email);
                 startActivity(Driver);
@@ -315,11 +307,6 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
-                try {
-                    TimeUnit.SECONDS.sleep(2);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 Intent owner = new Intent(getApplicationContext(), VehicleOwnerActivity.class);
                 owner.putExtra("email", email);
                 startActivity(owner);
@@ -361,14 +348,12 @@ public class LoginActivity extends AppCompatActivity {
             empty.put("endDate", FieldValue.delete());
 
             FirebaseFirestore.getInstance().collection("bookings").document(document.getString("email")).set(empty, SetOptions.merge());
+
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
-
-//asd
-//13/11/2022
-//driver
-//1 day
-//ushiradineth@gmail.com
-//14/11/2022
-//v1
