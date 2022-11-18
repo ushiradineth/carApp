@@ -80,7 +80,6 @@ public class VehicleOwnerAddedActivity extends AppCompatActivity {
                                     deleteVehicle.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
-                                            Log.d("TAG", document.getString("vehicle"));
 
                                             //deleting the vehicle
                                             FirebaseFirestore.getInstance().collection("vehicles").document(document.getString("vehicle")).delete()
