@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -33,6 +34,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 //this page lets users make their booking
 public class BookingFragment extends Fragment {
@@ -209,6 +219,81 @@ public class BookingFragment extends Fragment {
                             firestore.collection("users").document(drivers.getSelectedItem().toString()).update(temp);
 
                             Toast.makeText(getContext(), "Your vehicle has been booked!", Toast.LENGTH_LONG).show();
+
+                            firestore.collection("users").document(email).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if(task.isComplete()){
+                                        DocumentSnapshot doc = task.getResult();
+                                        //sending a confirmation email through an email
+                                        new Thread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                try  {
+                                                    String to = email;
+                                                    String from = "celiaootp@gmail.com";
+                                                    String host = "smtp.gmail.com";
+                                                    Properties properties = System.getProperties();
+                                                    properties.put("mail.smtp.host", host);
+                                                    properties.put("mail.smtp.port", "465");
+                                                    properties.put("mail.smtp.ssl.enable", "true");
+                                                    properties.put("mail.smtp.auth", "true");
+                                                    Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+                                                        protected PasswordAuthentication getPasswordAuthentication() {
+                                                            return new PasswordAuthentication( from, "fohxqqzczvmuyvht");
+                                                        }
+                                                    });
+                                                    session.setDebug(true);
+
+                                                    //calculating end date
+                                                    LocalDate date = LocalDate.now();
+                                                    switch (duration.getSelectedItem().toString()){
+                                                        case "1 day":
+                                                            date = LocalDate.now().plusDays(1);
+                                                            break;
+                                                        case "1 week":
+                                                            date = LocalDate.now().plusDays(7);
+                                                            break;
+                                                        case "2 weeks":
+                                                            date = LocalDate.now().plusDays(14);
+                                                            break;
+                                                        case "1 month":
+                                                            date = LocalDate.now().plusDays(30);
+                                                            break;
+                                                        case "3 months":
+                                                            date = LocalDate.now().plusDays(90);
+                                                            break;
+                                                    }
+
+                                                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+                                                    try {
+                                                        MimeMessage message = new MimeMessage(session);
+                                                        message.setFrom(new InternetAddress(from));
+                                                        message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+                                                        message.setSubject("Your Booking from Celiao Has Being Confirmed!");
+                                                        message.setContent("Dear<b> " + doc.getString("fullName") +
+                                                                        " </b>,<p>Your booking has been confirmed</p> " +
+                                                                        "<p>Address: " + address.getText().toString() +
+                                                                        "</p><p>Duration: " + duration.getSelectedItem().toString() +
+                                                                        "</p><p>End date: " + formatter.format(date) +
+                                                                        "</p><p>Driver: " + drivers.getSelectedItem().toString() +
+                                                                        "</p><p>Vehicle: " + vehicles.getSelectedItem().toString() +
+                                                                        "</p>"+
+                                                                        "<p>Thank You!</p>",
+                                                                "text/html;  charset=\"utf-8\"");
+                                                        Transport.send(message);
+                                                    } catch (MessagingException mex) {
+                                                        Toast.makeText(getContext(), "Error, Please try again later.", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                } catch (Exception e) {
+                                                    Toast.makeText(getContext(), "Error, Please try again later.", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        }).start();
+                                    }
+                                }
+                            });
 
                             //takes the user to the booking details page
                             Intent intent = new Intent(getContext(), BookingDetailsActivity.class);
