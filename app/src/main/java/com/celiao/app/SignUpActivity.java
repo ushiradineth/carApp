@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,7 +30,7 @@ import java.util.regex.Pattern;
 public class SignUpActivity extends AppCompatActivity {
     EditText fullName, email, mobileNo, password, confirmPassword;
     Spinner role;
-    Button button_signUp, button_signIn;
+    ImageView button_signUp, button_signIn;
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
     @Override
@@ -44,13 +45,14 @@ public class SignUpActivity extends AppCompatActivity {
         confirmPassword = (EditText) findViewById(R.id.editText_ConfirmPassword);
         role = (Spinner) findViewById(R.id.spinner_role);
 
-        button_signUp = (Button) findViewById(R.id.btnSignup);
-        button_signIn = (Button) findViewById(R.id.btnSigninref);
+        button_signUp = (ImageView) findViewById(R.id.btnSignup);
+        button_signIn = (ImageView) findViewById(R.id.btnSigninref);
 
         //array for the role spinner
         String[] roleArray = {"Customer", "Driver", "Vehicle owner"};
-        ArrayAdapter durationAdapter = new ArrayAdapter(getApplicationContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, roleArray);
-        role.setAdapter(durationAdapter);
+        ArrayAdapter roleAdapter = new ArrayAdapter(getApplicationContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, roleArray);
+        roleAdapter.setDropDownViewResource(R.layout.spinner);
+        role.setAdapter(roleAdapter);
     }
 
     @Override
@@ -138,6 +140,10 @@ public class SignUpActivity extends AppCompatActivity {
                                         user.put("password", password.getText().toString());
                                         user.put("registeredDate", formatter.format(LocalDate.now()));
                                         user.put("role", role.getSelectedItem().toString());
+
+                                        if(role.getSelectedItem().toString().equals("Driver")){
+                                            user.put("isAvailable", "false");
+                                        }
 
                                         //creating the user
                                         firestore.collection("users").document(email.getText().toString()).set(user)

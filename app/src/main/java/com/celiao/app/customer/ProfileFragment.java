@@ -4,17 +4,20 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 //this page is for user to see their user profile and to logout from their account
 public class ProfileFragment extends Fragment {
     TextView textView_fullname, textView_email, textView_mobileno;
-    Button logout, btnchoice;
+    ImageView logout, btnchoice;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -38,7 +41,7 @@ public class ProfileFragment extends Fragment {
 
         textView_fullname = (TextView) view.findViewById(R.id.textView_fullName);
         textView_email = (TextView) view.findViewById(R.id.textView_email);
-        textView_mobileno = (TextView) view.findViewById(R.id.textView_vehicleno);
+        textView_mobileno = (TextView) view.findViewById(R.id.textView_mobileno);
 
         String email = getArguments().getString("email");
 
@@ -58,7 +61,7 @@ public class ProfileFragment extends Fragment {
         });
 
         //button for user to see their booking if they have one
-        btnchoice = (Button) view.findViewById(R.id.btn_seebookingordelleteuser);
+        btnchoice = (ImageView) view.findViewById(R.id.btn_seebookingordelleteuser);
         FirebaseFirestore.getInstance().collection("bookings").document(email).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -66,8 +69,6 @@ public class ProfileFragment extends Fragment {
                     DocumentSnapshot doc = task.getResult();
                     if (doc.exists()) {
                         if(doc.getString("email") != null){
-                            btnchoice.setText("See booking");
-                            btnchoice.setVisibility(View.VISIBLE);
                             btnchoice.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
@@ -85,8 +86,7 @@ public class ProfileFragment extends Fragment {
                                 }
                             });
                         } else {
-                            btnchoice.setText("Delete profile");
-                            btnchoice.setVisibility(View.VISIBLE);
+                            btnchoice.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.deleteaccount));
                             btnchoice.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
@@ -112,12 +112,11 @@ public class ProfileFragment extends Fragment {
                             });
                         }
                     } else {
-                        btnchoice.setText("Delete profile");
-                        btnchoice.setVisibility(View.VISIBLE);
+                        btnchoice.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.deleteaccount));
                         btnchoice.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                //double checking if the user wants to logout
+                                //double checking if the user wants to delete the account
                                 new AlertDialog.Builder(view.getContext())
                                         .setTitle("Delete account?")
                                         .setMessage("Are you sure you want to delete your account?")
@@ -142,7 +141,7 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        logout = (Button) view.findViewById(R.id.btn_logout);
+        logout = (ImageView) view.findViewById(R.id.btn_logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

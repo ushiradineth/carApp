@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.celiao.app.R;
@@ -23,7 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 //this page is the home page for users who has not made a booking yet
 public class HomeFragment extends Fragment {
     TextView textView_greeting;
-    Button button_viewVehicles, button_viewBooking;
+    ImageView button_viewVehicles, button_viewBooking;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

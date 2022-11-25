@@ -38,8 +38,7 @@ import java.util.Map;
 //this page lets vehicle owners add new vehicles to the database
 public class VehicleOwnerAddVehicleActivity extends AppCompatActivity {
     EditText vehicleName, model, description, price, category;
-    Button button_addVehicle, button_uploadImage, logout, deleteAccount;
-    ImageView imgPreview;
+    ImageView button_uploadImage, button_addVehicle, deleteAccount, logout;
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
@@ -58,12 +57,11 @@ public class VehicleOwnerAddVehicleActivity extends AppCompatActivity {
         description = (EditText) findViewById(R.id.editText_description);
         price = (EditText) findViewById(R.id.editText_Price);
         category = (EditText) findViewById(R.id.editText_category);
-        imgPreview = (ImageView) findViewById(R.id.image_view);
-        button_addVehicle = (Button) findViewById(R.id.btn_addNewVehicle);
-        button_uploadImage = (Button) findViewById(R.id.btn_addImage);
+        button_addVehicle = (ImageView) findViewById(R.id.btn_addNewVehicle);
+        button_uploadImage = (ImageView) findViewById(R.id.btn_addImage);
         button_uploadImage.setOnClickListener(v -> setContent.launch("image/*"));
 
-        logout = (Button) findViewById(R.id.button_logout);
+        logout = (ImageView) findViewById(R.id.button_logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,16 +85,25 @@ public class VehicleOwnerAddVehicleActivity extends AppCompatActivity {
             }
         });
 
-        deleteAccount = (Button) findViewById(R.id.button_delete);
+        deleteAccount = (ImageView) findViewById(R.id.button_delete);
         deleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getApplicationContext().getSharedPreferences("shared", 0).edit().clear().commit();
+                new AlertDialog.Builder(view.getContext())
+                        .setTitle("Delete account?")
+                        .setMessage("Are you sure you want to delete your account?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                getApplicationContext().getSharedPreferences("shared", 0).edit().clear().commit();
 
-                FirebaseFirestore.getInstance().collection("users").document(email).delete();
-                Toast.makeText(getApplicationContext(), "User deleted!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
+                                FirebaseFirestore.getInstance().collection("users").document(email).delete();
+                                Toast.makeText(getApplicationContext(), "User deleted!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, null)
+                        .show();
             }
         });
     }
@@ -108,7 +115,7 @@ public class VehicleOwnerAddVehicleActivity extends AppCompatActivity {
             @Override
             public void onActivityResult(Uri result) {
                 if (result != null) {
-                    imgPreview.setImageURI(result);
+                    button_uploadImage.setImageURI(result);
                     file  = result;
                 }
             }

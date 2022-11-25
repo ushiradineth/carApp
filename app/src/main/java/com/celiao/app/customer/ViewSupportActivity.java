@@ -16,11 +16,13 @@ import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,7 +54,7 @@ import java.util.Map;
 
 //this page helps users who need vehicle breakdown support
 public class ViewSupportActivity extends AppCompatActivity {
-    Button button_location;
+    ImageView button_location;
     TextView txt_location;
     LocationRequest locationRequest;
 

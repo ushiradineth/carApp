@@ -73,7 +73,7 @@ public class BookingBookedFragment extends Fragment {
                                         textView_description.setText(doc.getString("description"));
 
                                         //getting image from the storage bucket
-                                        FirebaseStorage.getInstance().getReference().child("images/"+doc.getId()).getBytes(1024 * 1024).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                                        FirebaseStorage.getInstance().getReference().child("images/"+doc.getId()).getBytes(1024 * 1024 * 5).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                                             @Override
                                             public void onSuccess(byte[] bytes) {
                                                 Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);

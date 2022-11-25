@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".customer.ViewVehiclesActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:id="@+id/background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/background" />
+
     <ListView
         android:id="@+id/viewVehiclesList"
         android:layout_width="0dp"

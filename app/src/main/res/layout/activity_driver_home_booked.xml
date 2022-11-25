@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".driver.DriverHomeBookedActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:id="@+id/background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/background" />
+
+    <ImageView
+        android:id="@+id/usercard"
+        android:layout_width="350dp"
+        android:layout_height="160dp"
+        app:layout_constraintTop_toTopOf="@id/background"
+        app:layout_constraintLeft_toLeftOf="@id/background"
+        app:layout_constraintRight_toRightOf="@id/background"
+        android:layout_marginTop="40dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/card" />
+
+    <TextView
+        android:id="@+id/textView_greeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/usercard"
+        app:layout_constraintLeft_toLeftOf="@id/usercard"
+        app:layout_constraintRight_toRightOf="@id/usercard"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Loading..." />
+
+    <ImageView
+        android:id="@+id/button_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/logout"
+        app:layout_constraintEnd_toEndOf="@+id/textView_greeting"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="@+id/textView_greeting"
+        app:layout_constraintTop_toBottomOf="@+id/textView_greeting" />
+
+    <ImageView
+        android:id="@+id/jobcard"
+        android:layout_width="350dp"
+        android:layout_height="400dp"
+        app:layout_constraintTop_toBottomOf="@id/usercard"
+        app:layout_constraintLeft_toLeftOf="@id/usercard"
+        app:layout_constraintRight_toRightOf="@id/usercard"
+        android:layout_marginTop="30dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/card" />
+
+    <TextView
+        android:id="@+id/textView_job"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toTopOf="@id/jobcard"
+        app:layout_constraintLeft_toLeftOf="@id/jobcard"
+        app:layout_constraintRight_toRightOf="@id/jobcard"
+        android:fontFamily="@font/poppins_extrabold"
+        android:text="Job Details"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textView_job"
+        app:layout_constraintLeft_toLeftOf="@id/usercard"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Vehicle" />
+
+    <TextView
+        android:id="@+id/textView_vehicle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textView21"
+        app:layout_constraintLeft_toLeftOf="@id/textView21"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Loading..." />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textView21"
+        app:layout_constraintLeft_toLeftOf="@id/textView21"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Number" />
+
+    <TextView
+        android:id="@+id/textView_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        app:layout_constraintTop_toBottomOf="@id/textView19"
+        app:layout_constraintLeft_toLeftOf="@id/textView19"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:text="Loading..." />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textView19"
+        app:layout_constraintLeft_toLeftOf="@id/textView19"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Address" />
+
+    <TextView
+        android:id="@+id/textView_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textView23"
+        app:layout_constraintLeft_toLeftOf="@id/textView23"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Loading..." />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textView23"
+        app:layout_constraintLeft_toLeftOf="@id/textView23"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Duration" />
+
+    <TextView
+        android:id="@+id/textView_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textView24"
+        app:layout_constraintLeft_toLeftOf="@id/textView24"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Loading..." />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

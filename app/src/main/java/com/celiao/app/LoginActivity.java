@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 import com.celiao.app.customer.HomeActivity;
 import com.celiao.app.driver.DriverHomeActivity;
@@ -51,42 +52,20 @@ import javax.mail.internet.MimeMessage;
 //this is the first page a user sees when they login
 public class LoginActivity extends AppCompatActivity {
     EditText email, password;
-    Button button_signIn, Button_signUp;
+    ImageView Button_signUp, button_signIn;
     CheckBox button_remember;
-    SharedPreferences shared;
     String otp = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //checking if the user has already logged in
-        shared = getSharedPreferences("shared", MODE_PRIVATE);
-        if(shared.contains("email")){
-            //making sure that the admin dint delete the user
-            FirebaseFirestore.getInstance().collection("users").document(shared.getString("email", "defaultStringIfNothingFound")).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot doc = task.getResult();
-                        if (doc.exists()) {
-                            login(doc, shared.getString("email", "defaultStringIfNothingFound"));
-                        }
-                        else {
-                            getApplicationContext().getSharedPreferences("shared", 0).edit().clear().commit();
-                            Toast.makeText(getApplicationContext(),"Your account has being deleted by the Admin.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-            });
-        }
-
         setContentView(R.layout.activity_login);
 
         email = (EditText) findViewById(R.id.editText_LoginEmail);
         password = (EditText) findViewById(R.id.editText_Password);
-        button_signIn = (Button) findViewById(R.id.btn_Signin);
-        Button_signUp = (Button) findViewById(R.id.btn_Signupref);
+        button_signIn = (ImageView) findViewById(R.id.btn_Signin);
+        Button_signUp = (ImageView) findViewById(R.id.btn_SignUp);
         button_remember = (CheckBox) findViewById(R.id.btn_rememberme);
 
         Intent intent = getIntent();

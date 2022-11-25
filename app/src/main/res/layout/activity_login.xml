@@ -6,102 +6,113 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-    <EditText
-        android:id="@+id/editText_Password"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="1dp"
-        android:ems="10"
-        android:hint="Password"
-        android:importantForAutofill="no"
-        android:inputType="textPassword"
-        android:minHeight="48dp"
-        android:textColorHint="#757575"
-        app:layout_constraintEnd_toEndOf="@+id/editText_LoginEmail"
-        app:layout_constraintStart_toStartOf="@+id/editText_LoginEmail"
-        app:layout_constraintTop_toBottomOf="@+id/editText_LoginEmail" />
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:id="@+id/background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/background" />
 
-    <Button
-        android:id="@+id/btn_Signin"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Sign in"
-        app:layout_constraintEnd_toEndOf="@+id/editText_Password"
-        app:layout_constraintStart_toStartOf="@+id/editText_Password"
-        app:layout_constraintTop_toBottomOf="@+id/editText_Password" />
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="350dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="25dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/card"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="15dp"
-        android:text="Not registered?"
-        app:layout_constraintEnd_toStartOf="@+id/btn_Signupref"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="@+id/btn_rememberme"
-        app:layout_constraintTop_toBottomOf="@+id/btn_rememberme" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:fontFamily="monospace"
-        android:text="Celiao Car Rental App"
-        android:textSize="20sp"
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="195dp"
+        android:layout_height="126dp"
+        android:layout_marginTop="35dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/logo_full"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:fontFamily="monospace"
-        android:text="Login"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView9"
-        app:layout_constraintStart_toStartOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
-    <Button
-        android:id="@+id/btn_Signupref"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
-        android:text="Sign up"
-        app:layout_constraintEnd_toEndOf="@+id/btn_rememberme"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/btn_rememberme" />
-
     <EditText
         android:id="@+id/editText_LoginEmail"
-        android:layout_width="wrap_content"
+        android:backgroundTint="@color/textview"
+        android:textColorHint="@color/textview"
+        android:textCursorDrawable="@null"
+        android:textColor="@color/secondary"
+        android:textSize="12dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:autofillHints=""
-        android:ems="10"
-        android:hint="Email"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginTop="30dp"
+        android:hint="EMAIL"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView10"
-        app:layout_constraintStart_toStartOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintEnd_toEndOf="@+id/btn_SignUp"
+        app:layout_constraintStart_toStartOf="@+id/btn_SignUp"
+        app:layout_constraintTop_toBottomOf="@+id/btn_SignUp" />
+
+    <EditText
+        android:id="@+id/editText_Password"
+        android:backgroundTint="@color/textview"
+        android:textColorHint="@color/textview"
+        android:textCursorDrawable="@null"
+        android:textColor="@color/secondary"
+        android:textSize="12dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginTop="30dp"
+        android:hint="PASSWORD"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="@+id/editText_LoginEmail"
+        app:layout_constraintStart_toStartOf="@+id/editText_LoginEmail"
+        app:layout_constraintTop_toBottomOf="@+id/editText_LoginEmail" />
+
+    <ImageView
+        android:id="@+id/btn_Signin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/login"
+        app:layout_constraintEnd_toEndOf="@+id/btn_rememberme"
+        app:layout_constraintStart_toStartOf="@+id/btn_rememberme"
+        app:layout_constraintTop_toBottomOf="@+id/btn_rememberme" />
+
+    <ImageView
+        android:id="@+id/btn_SignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:src="@drawable/login_toggle"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
     <CheckBox
         android:id="@+id/btn_rememberme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Remember me"
-        app:layout_constraintEnd_toEndOf="@+id/btn_Signin"
-        app:layout_constraintStart_toStartOf="@+id/btn_Signin"
-        app:layout_constraintTop_toBottomOf="@+id/btn_Signin" />
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/textview"
+        android:buttonTint="@color/textview"
+        android:text="REMEMBER ME"
+        app:layout_constraintEnd_toEndOf="@+id/editText_Password"
+        app:layout_constraintStart_toStartOf="@+id/editText_Password"
+        app:layout_constraintTop_toBottomOf="@+id/editText_Password" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

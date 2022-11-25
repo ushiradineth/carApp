@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.celiao.app.R;
@@ -31,7 +32,7 @@ import java.util.concurrent.TimeUnit;
 //this page is the home page for booked users
 public class HomeBookedFragment extends Fragment {
     TextView textView_greeting, textView_bookingDaysLeft;
-    Button button_support, button_viewBooking;
+    ImageView button_support, button_viewBooking;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

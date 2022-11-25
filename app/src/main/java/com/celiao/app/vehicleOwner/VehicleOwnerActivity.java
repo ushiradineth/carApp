@@ -1,31 +1,28 @@
 package com.celiao.app.vehicleOwner;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-
-import com.celiao.app.LoginActivity;
 import com.celiao.app.R;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
+
+import java.util.HashMap;
+import java.util.Map;
 
 // this is a page handles whether the vehicle owner has already added a vehicle or not
 public class VehicleOwnerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vehicle_owner);
+        setContentView(R.layout.activity_splash_screen);
 
         Intent emailIntent = getIntent();
         String email = emailIntent.getStringExtra("email");
@@ -37,12 +34,29 @@ public class VehicleOwnerActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
-                    if (document.getString("vehicle") == null) {
-                        Intent intent = new Intent(getApplicationContext(), VehicleOwnerAddVehicleActivity.class);
-                        intent.putExtra("email", email);
-                        startActivity(intent);
+                    if (document.getString("vehicle") != null) {
+                        FirebaseFirestore.getInstance().collection("vehicles").document(document.getString("vehicle")).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    DocumentSnapshot document = task.getResult();
+                                    if(document.exists()){
+                                        Intent intent = new Intent(getApplicationContext(), VehicleOwnerAddedActivity.class);
+                                        intent.putExtra("email", email);
+                                        startActivity(intent);
+                                    } else {
+                                        Map<String, Object> temp = new HashMap<>();
+                                        temp.put("vehicle", FieldValue.delete());
+                                        FirebaseFirestore.getInstance().collection("users").document(email).set(temp, SetOptions.merge());
+                                        Intent intent = new Intent(getApplicationContext(), VehicleOwnerAddVehicleActivity.class);
+                                        intent.putExtra("email", email);
+                                        startActivity(intent);
+                                    }
+                                }
+                            }
+                        });
                     } else {
-                        Intent intent = new Intent(getApplicationContext(), VehicleOwnerAddedActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), VehicleOwnerAddVehicleActivity.class);
                         intent.putExtra("email", email);
                         startActivity(intent);
                     }

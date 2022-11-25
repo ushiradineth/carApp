@@ -22,8 +22,7 @@ import com.google.firebase.storage.FirebaseStorage;
 //this page shows users the specific vehicle details that was clicked on
 public class ViewVehiclesActivityVehicle extends AppCompatActivity {
     TextView textView_vehicleNo, textView_model, textView_category, textView_price, textView_description, textView_available;
-    ImageView imageView;
-    Button booknow;
+    ImageView imageView,booknow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +34,9 @@ public class ViewVehiclesActivityVehicle extends AppCompatActivity {
         textView_category = (TextView) findViewById(R.id.textView_Category);
         textView_price = (TextView) findViewById(R.id.textView_Price);
         textView_description = (TextView) findViewById(R.id.textView_Description);
-        textView_available = (TextView) findViewById(R.id.textView_Available);
+        textView_available = (TextView) findViewById(R.id.textView_availability);
         imageView = (ImageView) findViewById(R.id.imageView);
-        booknow = (Button) findViewById(R.id.booknow);
+        booknow = (ImageView) findViewById(R.id.booknow);
 
         Intent intent = getIntent();
         String vehicle = intent.getStringExtra("vehicle");

@@ -25,8 +25,7 @@ import com.google.firebase.storage.FirebaseStorage;
 //this page shows booking details to a user after they complete their booking
 public class BookingDetailsActivity extends AppCompatActivity {
     TextView textView_address, textView_duration, textView_endDate, textView_vehicleNo, textView_model, textView_category, textView_price, textView_description, textView_driver;
-    ImageView imageView;
-    Button exit;
+    ImageView imageView, exit;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -74,7 +73,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
                                         textView_description.setText(doc.getString("description"));
 
                                         //getting image from the storage bucket
-                                        FirebaseStorage.getInstance().getReference().child("images/"+doc.getId()).getBytes(1024 * 1024).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                                        FirebaseStorage.getInstance().getReference().child("images/"+doc.getId()).getBytes(1024 * 1024 * 5).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                                             @Override
                                             public void onSuccess(byte[] bytes) {
                                                 Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
@@ -91,7 +90,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
         });
 
         //exit button to return the the main menu
-        exit = (Button) findViewById(R.id.btn_exit);
+        exit = (ImageView) findViewById(R.id.btn_exit);
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

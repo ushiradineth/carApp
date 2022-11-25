@@ -6,31 +6,58 @@
     android:layout_height="match_parent"
     tools:context=".customer.HomeFragment">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:id="@+id/background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/background" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/card"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
     <TextView
         android:id="@+id/textView_greeting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="67dp"
-        android:layout_marginTop="78dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/poppins_medium"
         android:text="Loading..."
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
-    <Button
+    <ImageView
         android:id="@+id/button_viewVehicles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="view vehicles"
+        android:src="@drawable/viewvehicles"
+        app:layout_constraintEnd_toEndOf="@+id/textView_greeting"
         app:layout_constraintStart_toStartOf="@+id/textView_greeting"
         app:layout_constraintTop_toBottomOf="@+id/textView_greeting" />
 
-    <Button
+    <ImageView
         android:id="@+id/btn_viewBooking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="create booking"
+        android:src="@drawable/createbooking"
+        app:layout_constraintEnd_toEndOf="@+id/button_viewVehicles"
         app:layout_constraintStart_toStartOf="@+id/button_viewVehicles"
         app:layout_constraintTop_toBottomOf="@+id/button_viewVehicles" />
 </androidx.constraintlayout.widget.ConstraintLayout>

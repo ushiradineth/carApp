@@ -17,6 +17,21 @@
         android:theme="@style/Theme.App.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".driver.DriverHomeNotBookedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".driver.DriverHomeBookedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashScreenActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".vehicleOwner.VehicleOwnerAddedActivity"
             android:exported="false" />
         <activity
@@ -27,9 +42,7 @@
             android:exported="false" />
         <activity
             android:name=".customer.ViewVehiclesActivityCustomListView"
-            android:exported="false"
-            android:label="@string/title_activity_customer_view_vehicles_custom_list_view"
-            android:theme="@style/Theme.App.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name=".customer.ViewVehiclesActivityVehicle"
             android:exported="false" />
@@ -41,9 +54,7 @@
             android:exported="false" />
         <activity
             android:name=".customer.ViewSupportActivity"
-            android:exported="false"
-            android:label="@string/title_activity_customer_view_support"
-            android:theme="@style/Theme.App.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name=".SignUpActivity"
             android:exported="false" />
@@ -55,13 +66,7 @@
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -37,7 +38,7 @@ import java.util.Map;
 public class BookingFragment extends Fragment {
     Spinner vehicles, duration, drivers;
     EditText address;
-    Button button_confirm;
+    ImageView button_confirm;
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
     @Override
@@ -48,84 +49,106 @@ public class BookingFragment extends Fragment {
         duration = (Spinner) view.findViewById(R.id.spinner_duration);
         drivers = (Spinner) view.findViewById(R.id.spinner_driver);
         address = (EditText) view.findViewById(R.id.address);
-        button_confirm = (Button) view.findViewById(R.id.btn_confirm);
+        button_confirm = (ImageView) view.findViewById(R.id.btn_confirm);
 
-        String vehicle = getArguments().getString("vehicle");
-
-        //creating an array for the vehicle spinner
-        firestore.collection("vehicles")
-            .get()
-            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if (task.isSuccessful()) {
-                        List<String> vehiclesList = new ArrayList<String>();
-
-                        //adds all available vehicles to a list
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-
-                            //gets the available vehicles
-                            if(document.getString("isAvailable").equals("true")){
-                                vehiclesList.add(document.getString("vehicleName"));
-                            }
-                        }
-
-                        String[] vehiclesArray = new String[vehiclesList.size()];
-                        vehiclesList.toArray(vehiclesArray);
-
-                        //pushes the array to the spinner
-                        ArrayAdapter vehiclesAdapter = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, vehiclesArray);
-                        vehicles.setAdapter(vehiclesAdapter);
-
-                        //for bookings through view vehicles activity
-                        for(int i = 0; i < vehiclesList.size(); i++){
-                            if(vehiclesList.get(i).equals(vehicle)){
-                                vehicles.setSelection(i);
-                            }
-                        }
-                    }
-                }
-            });
-
-        //creating an array for the driver spinner
-        firestore.collection("users")
-            .get()
-            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if (task.isSuccessful()) {
-                        List<String> driverList = new ArrayList<String>();
-
-                        //adds all available vehicles to a list
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            if(document.getString("role").equals("Driver")) {
-                                //gets the available vehicles
-                                if (document.getString("isAvailable").equals("true")) {
-                                    driverList.add(document.getString("email"));
-                                }
-                            }
-                        }
-
-                        String[] driversArray = new String[driverList.size()];
-                        driverList.toArray(driversArray);
-
-                        //pushes the array to the spinner
-                        ArrayAdapter driverAdapter = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, driversArray);
-                        drivers.setAdapter(driverAdapter);
-                    }
-                }
-            });
-
-        //array for the duration spinner
-        String[] durationArray = {"1 day", "1 week", "2 weeks", "1 month", "3 months"};
-        ArrayAdapter durationAdapter = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, durationArray);
-        duration.setAdapter(durationAdapter);
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
+        String vehicle = getArguments().getString("vehicle");
+
+        //creating an array for the vehicle spinner
+        firestore.collection("vehicles")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            List<String> vehiclesList = new ArrayList<String>();
+
+                            //adds all available vehicles to a list
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                //gets the available vehicles
+                                if(document.getString("isAvailable").equals("true")){
+                                    vehiclesList.add(document.getString("vehicleName"));
+                                }
+                            }
+
+                            vehiclesList.add("Vehicle");
+                            String[] vehiclesArray = new String[vehiclesList.size()];
+                            vehiclesList.toArray(vehiclesArray);
+
+                            //pushes the array to the spinner
+                            ArrayAdapter vehiclesAdapter = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, vehiclesArray){
+                                @Override
+                                public int getCount() {
+                                    return vehiclesArray.length-1;
+                                }
+                            };
+
+                            vehicles.setAdapter(vehiclesAdapter);
+                            vehicles.setSelection(vehiclesArray.length-1);
+
+                            //for bookings through view vehicles activity
+                            for(int i = 0; i < vehiclesList.size(); i++){
+                                if(vehiclesList.get(i).equals(vehicle)){
+                                    vehicles.setSelection(i);
+                                }
+                            }
+                        }
+                    }
+                });
+
+        //creating an array for the driver spinner
+        firestore.collection("users")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            List<String> driverList = new ArrayList<String>();
+
+                            //adds all available vehicles to a list
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if(document.getString("role").equals("Driver")) {
+                                    //gets the available vehicles
+                                    if (document.getString("isAvailable").equals("true")) {
+                                        driverList.add(document.getString("email"));
+                                    }
+                                }
+                            }
+
+                            driverList.add("Driver");
+                            String[] driversArray = new String[driverList.size()];
+                            driverList.toArray(driversArray);
+
+                            //pushes the array to the spinner
+                            ArrayAdapter driverAdapter = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, driversArray){
+                                @Override
+                                public int getCount() {
+                                    return driversArray.length-1;
+                                }
+                            };
+                            drivers.setAdapter(driverAdapter);
+                            drivers.setSelection(driversArray.length-1);
+                        }
+                    }
+                });
+
+        //array for the duration spinner
+        String[] durationArray = {"1 day", "1 week", "2 weeks", "1 month", "3 months", "Duration"};
+        ArrayAdapter durationAdapter = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, durationArray){
+            @Override
+            public int getCount() {
+                return durationArray.length-1;
+            }
+        };
+        duration.setAdapter(durationAdapter);
+        duration.setSelection(durationArray.length-1);
 
         button_confirm.setOnClickListener(new View.OnClickListener(){
             @RequiresApi(api = Build.VERSION_CODES.O)

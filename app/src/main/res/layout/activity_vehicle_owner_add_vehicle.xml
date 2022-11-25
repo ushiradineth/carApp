@@ -6,57 +6,72 @@
     android:layout_height="match_parent"
     tools:context=".vehicleOwner.VehicleOwnerAddVehicleActivity">
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="168dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="168dp"
-        android:text="Add Vehicle"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:id="@+id/background"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/background" />
 
     <ImageView
-        android:id="@+id/image_view"
+        android:id="@+id/card"
+        android:layout_width="410dp"
+        android:layout_height="650dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/card"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageView
+        android:id="@+id/btn_addImage"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="@+id/editText_category"
         app:layout_constraintStart_toStartOf="@+id/editText_category"
         app:layout_constraintTop_toBottomOf="@+id/editText_category"
-        tools:src="@drawable/ic_baseline_image_24" />
-
-    <Button
-        android:id="@+id/btn_addImage"
-        android:layout_width="100dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="31dp"
-        android:layout_marginEnd="37dp"
-        android:text="Choose Image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/image_view"
-        app:layout_constraintTop_toBottomOf="@+id/editText_category" />
+        android:src="@drawable/ic_baseline_image_24" />
 
     <EditText
         android:id="@+id/editText_vehicleName"
-        android:layout_width="wrap_content"
+        android:textCursorDrawable="@null"
+        android:textColor="@color/secondary"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#D9D9D9"
         android:ems="10"
+        android:fontFamily="@font/poppins_medium"
         android:hint="Vehicle Name"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView11"
-        app:layout_constraintStart_toStartOf="@+id/textView11"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        android:textAlignment="viewStart"
+        android:textColorHint="#D9D9D9"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="@+id/card"
+        app:layout_constraintTop_toTopOf="@+id/card" />
 
     <EditText
-        android:id="@+id/editText_Price"
-        android:layout_width="wrap_content"
+        android:textCursorDrawable="@null"
+        android:textColor="@color/secondary"
+        android:backgroundTint="#D9D9D9"
+        android:textColorHint="#D9D9D9"
+        android:textSize="12dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:textAlignment="viewStart"
+        android:id="@+id/editText_Price"
         android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="Price"
@@ -65,93 +80,96 @@
         app:layout_constraintEnd_toEndOf="@+id/editText_description"
         app:layout_constraintStart_toStartOf="@+id/editText_description"
         app:layout_constraintTop_toBottomOf="@+id/editText_description"
-        tools:ignore="TouchTargetSizeCheck" />
+        tools:ignore="TouchTargetSizeCheck"/>
 
     <EditText
-        android:id="@+id/editText_category"
-        android:layout_width="wrap_content"
+        android:textCursorDrawable="@null"
+        android:textColor="@color/secondary"
+        android:backgroundTint="#D9D9D9"
+        android:textColorHint="#D9D9D9"
+        android:textSize="12dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:textAlignment="viewStart"
         android:layout_marginTop="12dp"
         android:ems="10"
+        android:minHeight="48dp"
+        android:id="@+id/editText_category"
         android:hint="Category"
         android:inputType="textPersonName"
-        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="@+id/editText_Price"
         app:layout_constraintStart_toStartOf="@+id/editText_Price"
-        app:layout_constraintTop_toBottomOf="@+id/editText_Price" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_Price"/>
 
     <EditText
-        android:id="@+id/editText_model"
-        android:layout_width="wrap_content"
+        android:textCursorDrawable="@null"
+        android:textColor="@color/secondary"
+        android:backgroundTint="#D9D9D9"
+        android:textColorHint="#D9D9D9"
+        android:textSize="12dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:textAlignment="viewStart"
         android:layout_marginTop="12dp"
         android:ems="10"
-        android:hint="Model"
-        android:inputType="textPersonName"
         android:minHeight="48dp"
+        android:inputType="textPersonName"
+        android:id="@+id/editText_model"
+        android:hint="Model"
         app:layout_constraintEnd_toEndOf="@+id/editText_vehicleName"
         app:layout_constraintStart_toStartOf="@+id/editText_vehicleName"
-        app:layout_constraintTop_toBottomOf="@+id/editText_vehicleName" />
-
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="18dp"
-        android:text="Add image: "
-        app:layout_constraintEnd_toStartOf="@+id/image_view"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_category" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_vehicleName"/>
 
     <EditText
-        android:id="@+id/editText_description"
-        android:layout_width="wrap_content"
+        android:textCursorDrawable="@null"
+        android:textColor="@color/secondary"
+        android:backgroundTint="#D9D9D9"
+        android:textColorHint="#D9D9D9"
+        android:textSize="12dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:textAlignment="viewStart"
         android:layout_marginTop="12dp"
         android:ems="10"
-        android:hint="Description"
-        android:inputType="textPersonName"
         android:minHeight="48dp"
+        android:inputType="textPersonName"
+        android:id="@+id/editText_description"
+        android:hint="Description"
         app:layout_constraintEnd_toEndOf="@+id/editText_model"
         app:layout_constraintStart_toStartOf="@+id/editText_model"
-        app:layout_constraintTop_toBottomOf="@+id/editText_model" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_model"/>
 
-    <Button
+    <ImageView
         android:id="@+id/btn_addNewVehicle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="73dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="26dp"
-        android:text="Add Vehicle"
-        app:layout_constraintEnd_toStartOf="@+id/button_logout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_view" />
+        android:layout_marginTop="15dp"
+        android:src="@drawable/addvehicle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/background"
+        app:layout_constraintTop_toBottomOf="@+id/btn_addImage" />
 
-    <Button
+    <ImageView
         android:id="@+id/button_logout"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="83dp"
-        android:text="Log out"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="92dp"
+        android:src="@drawable/logout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_addNewVehicle"
-        app:layout_constraintTop_toBottomOf="@+id/image_view" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_addNewVehicle" />
 
-    <Button
+    <ImageView
         android:id="@+id/button_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="121dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="122dp"
-        android:text="Delete Account"
+        android:src="@drawable/deleteaccount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_addNewVehicle" />
+        app:layout_constraintStart_toStartOf="@+id/background"
+        app:layout_constraintTop_toBottomOf="@+id/button_logout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,43 +6,70 @@
     android:layout_height="match_parent"
     tools:context=".customer.ViewSupportActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:id="@+id/background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/background" />
+
+    <ImageView
+        android:id="@+id/card"
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/card"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
     <TextView
+        android:fontFamily="@font/poppins_medium"
         android:id="@+id/textView_greeting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="26dp"
         android:text="Loading..."
-        app:layout_constraintBottom_toTopOf="@+id/bookingdaysleft"
-        app:layout_constraintStart_toStartOf="@+id/bookingdaysleft" />
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/card"
+        app:layout_constraintStart_toStartOf="@+id/card"
+        app:layout_constraintTop_toTopOf="@+id/card" />
 
-    <Button
+    <ImageView
         android:id="@+id/btn_support"
-        android:layout_width="275dp"
-        android:layout_height="54dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="view breakdown support information"
+        android:src="@drawable/requestforsupport"
+        app:layout_constraintEnd_toEndOf="@+id/btn_viewBooking"
         app:layout_constraintStart_toStartOf="@+id/btn_viewBooking"
         app:layout_constraintTop_toBottomOf="@+id/btn_viewBooking" />
 
-    <Button
+    <ImageView
         android:id="@+id/btn_viewBooking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="142dp"
-        android:text="view your booking"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:src="@drawable/viewbooking"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/bookingdaysleft"
+        app:layout_constraintStart_toStartOf="@+id/bookingdaysleft"
+        app:layout_constraintTop_toBottomOf="@+id/bookingdaysleft" />
 
     <TextView
+        android:fontFamily="@font/poppins_medium"
         android:id="@+id/bookingdaysleft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:layout_marginBottom="22dp"
+        android:layout_marginTop="20dp"
         android:text="Loading..."
-        app:layout_constraintBottom_toTopOf="@+id/btn_viewBooking"
-        app:layout_constraintStart_toStartOf="@+id/btn_viewBooking" />
+        app:layout_constraintEnd_toEndOf="@+id/textView_greeting"
+        app:layout_constraintStart_toStartOf="@+id/textView_greeting"
+        app:layout_constraintTop_toBottomOf="@+id/textView_greeting" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
