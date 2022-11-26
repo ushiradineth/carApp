@@ -1,9 +1,11 @@
 package com.celiao.app.vehicleOwner;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.celiao.app.R;
@@ -16,9 +18,12 @@ import com.google.firebase.firestore.SetOptions;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 // this is a page handles whether the vehicle owner has already added a vehicle or not
 public class VehicleOwnerActivity extends AppCompatActivity {
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +31,12 @@ public class VehicleOwnerActivity extends AppCompatActivity {
 
         Intent emailIntent = getIntent();
         String email = emailIntent.getStringExtra("email");
+
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         //updates the database with the new records if the conditions are met
         FirebaseFirestore.getInstance().collection("users").document(email).get()

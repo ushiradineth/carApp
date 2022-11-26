@@ -89,7 +89,7 @@ public class VehicleOwnerAddedActivity extends AppCompatActivity {
                                 availability.setText(doc.getString("isAvailable"));
 
                                 //getting image from the storage bucket
-                                FirebaseStorage.getInstance().getReference().child("images/"+doc.getString("vehicleName")).getBytes(1024 * 1024).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                                FirebaseStorage.getInstance().getReference().child("images/"+doc.getString("vehicleName")).getBytes(1024 * 1024 * 5).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                                     @Override
                                     public void onSuccess(byte[] bytes) {
                                         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);

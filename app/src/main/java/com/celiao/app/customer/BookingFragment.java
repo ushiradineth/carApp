@@ -171,6 +171,21 @@ public class BookingFragment extends Fragment {
                     return;
                 }
 
+                if(vehicles.getSelectedItem().toString().equals("Vehicle")){
+                    Toast.makeText(getContext(), "Choose a vehicle", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(duration.getSelectedItem().toString().equals("Duration")){
+                    Toast.makeText(getContext(), "Choose a duration", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(drivers.getSelectedItem().toString().equals("Driver")){
+                    Toast.makeText(getContext(), "Choose a driver", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 //calculating end date
                 LocalDate date = LocalDate.now();
                 switch (duration.getSelectedItem().toString()){

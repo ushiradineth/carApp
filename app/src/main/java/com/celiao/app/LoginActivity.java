@@ -115,71 +115,73 @@ public class LoginActivity extends AppCompatActivity {
                                         editor.putString("email", email.getText().toString());
                                         editor.commit();
                                     }
-                                    //creating otp
-                                    for (int i = 0; i < 6; i++) {
-                                        otp+=(int)(Math.random() * 9);
-                                    }
+//                                    //creating otp
+//                                    for (int i = 0; i < 6; i++) {
+//                                        otp+=(int)(Math.random() * 9);
+//                                    }
+//
+//                                    //sending the otp code through an email
+//                                    new Thread(new Runnable() {
+//                                        @Override
+//                                        public void run() {
+//                                            try  {
+//                                                String to = email.getText().toString();
+//                                                String from = "celiaootp@gmail.com";
+//                                                String host = "smtp.gmail.com";
+//                                                Properties properties = System.getProperties();
+//                                                properties.put("mail.smtp.host", host);
+//                                                properties.put("mail.smtp.port", "465");
+//                                                properties.put("mail.smtp.ssl.enable", "true");
+//                                                properties.put("mail.smtp.auth", "true");
+//                                                Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+//                                                    protected PasswordAuthentication getPasswordAuthentication() {
+//                                                        return new PasswordAuthentication( from, "fohxqqzczvmuyvht");
+//                                                    }
+//                                                });
+//                                                session.setDebug(true);
+//                                                try {
+//                                                    MimeMessage message = new MimeMessage(session);
+//                                                    message.setFrom(new InternetAddress(from));
+//                                                    message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+//                                                    message.setSubject("Your OTP Code for Celiao!");
+//                                                    message.setText("Your Code is: " + otp);
+//                                                    Transport.send(message);
+//                                                } catch (MessagingException mex) {
+//                                                    Toast.makeText(LoginActivity.this, "Error, Please try again later.", Toast.LENGTH_SHORT).show();
+//                                                }
+//                                            } catch (Exception e) {
+//                                                Toast.makeText(LoginActivity.this, "Error, Please try again later.", Toast.LENGTH_SHORT).show();
+//                                            }
+//                                        }
+//                                    }).start();
+//
+//                                    //alert box to take otp input
+//                                    EditText otpEditText = new EditText(new ContextThemeWrapper(getBaseContext(),R.style.EditTextStyle),null,0);
+//                                    new AlertDialog.Builder(view.getContext(), R.style.AlertBoxStyle)
+//                                        .setTitle("Two Factor Authentication")
+//                                        .setMessage("Check your email for the code!")
+//                                        .setView(otpEditText)
+//                                        .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+//                                            public void onClick(DialogInterface dialog, int which) {
+//                                                if(otpEditText.getText().toString().equals(otp)){
+//                                                    //saving user state if the checkbox is checked
+//                                                    if(button_remember.isChecked()){
+//                                                        SharedPreferences shared = getSharedPreferences("shared", MODE_PRIVATE);
+//                                                        SharedPreferences.Editor editor = shared.edit();
+//                                                        editor.putString("email", email.getText().toString());
+//                                                        editor.commit();
+//                                                    }
+//                                                    login(doc, email.getText().toString());
+//                                                } else {
+//                                                    otp = "";
+//                                                    Toast.makeText(LoginActivity.this, "Incorrect Code, Try again", Toast.LENGTH_SHORT).show();
+//                                                }
+//                                            }
+//                                        })
+//                                        .setNegativeButton("Cancel", null)
+//                                        .show();
 
-                                    //sending the otp code through an email
-                                    new Thread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            try  {
-                                                String to = email.getText().toString();
-                                                String from = "celiaootp@gmail.com";
-                                                String host = "smtp.gmail.com";
-                                                Properties properties = System.getProperties();
-                                                properties.put("mail.smtp.host", host);
-                                                properties.put("mail.smtp.port", "465");
-                                                properties.put("mail.smtp.ssl.enable", "true");
-                                                properties.put("mail.smtp.auth", "true");
-                                                Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
-                                                    protected PasswordAuthentication getPasswordAuthentication() {
-                                                        return new PasswordAuthentication( from, "fohxqqzczvmuyvht");
-                                                    }
-                                                });
-                                                session.setDebug(true);
-                                                try {
-                                                    MimeMessage message = new MimeMessage(session);
-                                                    message.setFrom(new InternetAddress(from));
-                                                    message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-                                                    message.setSubject("Your OTP Code for Celiao!");
-                                                    message.setText("Your Code is: " + otp);
-                                                    Transport.send(message);
-                                                } catch (MessagingException mex) {
-                                                    Toast.makeText(LoginActivity.this, "Error, Please try again later.", Toast.LENGTH_SHORT).show();
-                                                }
-                                            } catch (Exception e) {
-                                                Toast.makeText(LoginActivity.this, "Error, Please try again later.", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    }).start();
-
-                                    //alert box to take otp input
-                                    EditText otpEditText = new EditText(new ContextThemeWrapper(getBaseContext(),R.style.EditTextStyle),null,0);
-                                    new AlertDialog.Builder(view.getContext(), R.style.AlertBoxStyle)
-                                        .setTitle("Two Factor Authentication")
-                                        .setMessage("Check your email for the code!")
-                                        .setView(otpEditText)
-                                        .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                if(otpEditText.getText().toString().equals(otp)){
-                                                    //saving user state if the checkbox is checked
-                                                    if(button_remember.isChecked()){
-                                                        SharedPreferences shared = getSharedPreferences("shared", MODE_PRIVATE);
-                                                        SharedPreferences.Editor editor = shared.edit();
-                                                        editor.putString("email", email.getText().toString());
-                                                        editor.commit();
-                                                    }
-                                                    login(doc, email.getText().toString());
-                                                } else {
-                                                    otp = "";
-                                                    Toast.makeText(LoginActivity.this, "Incorrect Code, Try again", Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                        })
-                                        .setNegativeButton("Cancel", null)
-                                        .show();
+                                    login(doc, email.getText().toString());
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Wrong password", Toast.LENGTH_LONG).show();
                                 }

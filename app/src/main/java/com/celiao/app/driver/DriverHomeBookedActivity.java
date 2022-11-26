@@ -73,35 +73,41 @@ public class DriverHomeBookedActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists() && document.getString("role").equals("Driver")) {
-                            //getting booking details
-                            FirebaseFirestore.getInstance().collection("bookings").document(document.getString("booking")).get()
-                                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                        if (task.isSuccessful()) {
-                                            DocumentSnapshot document = task.getResult();
-                                            if (document.exists()) {
-                                                date.setText(document.getString("bookedDate") + " - " + document.getString("endDate"));
-                                                address.setText(document.getString("address"));
-                                                vehicle.setText(document.getString("vehicle"));
+                            if(document.getString("booking") == null){
+                                Intent intent = new Intent(getApplicationContext(), DriverHomeNotBookedActivity.class);
+                                intent.putExtra("email", email);
+                                startActivity(intent);
+                            } else {
+                                //getting booking details
+                                FirebaseFirestore.getInstance().collection("bookings").document(document.getString("booking")).get()
+                                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    DocumentSnapshot document = task.getResult();
+                                                    if (document.exists()) {
+                                                        date.setText(document.getString("bookedDate") + " - " + document.getString("endDate"));
+                                                        address.setText(document.getString("address"));
+                                                        vehicle.setText(document.getString("vehicle"));
 
-                                                //getting customers number
-                                                FirebaseFirestore.getInstance().collection("users").document(document.getString("email")).get()
-                                                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                                            if (task.isSuccessful()) {
-                                                                DocumentSnapshot document = task.getResult();
-                                                                if (document.exists()) {
-                                                                    number.setText(document.getString("mobileNo"));
-                                                                }
-                                                            }
-                                                        }
-                                                    });
+                                                        //getting customers number
+                                                        FirebaseFirestore.getInstance().collection("users").document(document.getString("email")).get()
+                                                                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                                        if (task.isSuccessful()) {
+                                                                            DocumentSnapshot document = task.getResult();
+                                                                            if (document.exists()) {
+                                                                                number.setText(document.getString("mobileNo"));
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                });
+                                                    }
+                                                }
                                             }
-                                        }
-                                    }
-                                });
+                                        });
+                            }
                         }
                     }
                 }

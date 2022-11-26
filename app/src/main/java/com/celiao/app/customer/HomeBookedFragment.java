@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,29 +66,37 @@ public class HomeBookedFragment extends Fragment {
                 if(task.isSuccessful()){
                     DocumentSnapshot doc = task.getResult();
                     if (doc.exists()) {
-                        String today = LocalDate.now().toString();
-                        String endDate = doc.getString("endDate");
+                        if(doc.getString("email") == null){
+                            HomeFragment home = new HomeFragment();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("email", email);
+                            home.setArguments(bundle);
+                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, home).addToBackStack(null).commit();
+                        } else {
+                            String today = LocalDate.now().toString();
+                            String endDate = doc.getString("endDate");
 
-                        //converting the dates to the same format
-                        try {
-                            Date start = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
-                                    .parse(today);
-                            Date end = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
-                                    .parse(endDate);
+                            //converting the dates to the same format
+                            try {
+                                Date start = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+                                        .parse(today);
+                                Date end = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+                                        .parse(endDate);
 
-                            //comparing the dates
-                            long diff = end.getTime() - start.getTime();
+                                //comparing the dates
+                                long diff = end.getTime() - start.getTime();
 
-                            long days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+                                long days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 
-                            if (days > 0) {
-                                textView_bookingDaysLeft.setText(String.valueOf(days)+" days left on your current booking.");
-                            } else {
-                                textView_bookingDaysLeft.setText("Your booking ends today!");
+                                if (days > 0) {
+                                    textView_bookingDaysLeft.setText(String.valueOf(days)+" days left on your current booking.");
+                                } else {
+                                    textView_bookingDaysLeft.setText("Your booking ends today!");
+                                }
+
+                            } catch (ParseException e) {
+                                e.printStackTrace();
                             }
-
-                        } catch (ParseException e) {
-                            e.printStackTrace();
                         }
                     }
                 }
