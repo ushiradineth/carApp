@@ -30,10 +30,10 @@ public class ViewVehiclesActivityVehicle extends AppCompatActivity {
         setContentView(R.layout.activity_customer_view_vehicles_vehicle);
 
         textView_vehicleNo = (TextView) findViewById(R.id.textView_VehicleNo);
-        textView_model = (TextView) findViewById(R.id.textView_Model);
-        textView_category = (TextView) findViewById(R.id.textView_Category);
-        textView_price = (TextView) findViewById(R.id.textView_Price);
-        textView_description = (TextView) findViewById(R.id.textView_Description);
+        textView_model = (TextView) findViewById(R.id.textView_model);
+        textView_category = (TextView) findViewById(R.id.textView_category);
+        textView_price = (TextView) findViewById(R.id.textView_price);
+        textView_description = (TextView) findViewById(R.id.textView_description);
         textView_available = (TextView) findViewById(R.id.textView_availability);
         imageView = (ImageView) findViewById(R.id.imageView);
         booknow = (ImageView) findViewById(R.id.booknow);
