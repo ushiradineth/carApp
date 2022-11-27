@@ -132,9 +132,9 @@ public class VehicleOwnerAddedActivity extends AppCompatActivity {
                                     });
                                 } else {
                                     deleteVehicle.setVisibility(View.INVISIBLE);
-                                    card.getLayoutParams().height = 2000;
+                                    card.getLayoutParams().height = 2300;
                                     ImageView background = (ImageView) findViewById(R.id.background);
-                                    background.getLayoutParams().height = 2650;
+                                    background.getLayoutParams().height = 3000;
                                 }
                            }
                        });
