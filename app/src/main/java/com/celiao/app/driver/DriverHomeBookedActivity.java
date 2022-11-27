@@ -113,4 +113,9 @@ public class DriverHomeBookedActivity extends AppCompatActivity {
                 }
             });
     }
+
+    @Override
+    public void onBackPressed() {
+        this.moveTaskToBack(true);
+    }
 }
