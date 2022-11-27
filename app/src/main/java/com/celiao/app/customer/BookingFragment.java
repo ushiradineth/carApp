@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,20 +89,33 @@ public class BookingFragment extends Fragment {
                                 }
                             }
 
-                            vehiclesList.add("Vehicle");
-                            String[] vehiclesArray = new String[vehiclesList.size()];
-                            vehiclesList.toArray(vehiclesArray);
+                            if(vehiclesList.size() == 0){
+                                vehicles.setEnabled(false);
+                                vehicles.setClickable(false);
 
-                            //pushes the array to the spinner
-                            ArrayAdapter vehiclesAdapter = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, vehiclesArray){
-                                @Override
-                                public int getCount() {
-                                    return vehiclesArray.length-1;
-                                }
-                            };
+                                vehiclesList.add("No Vehicles Available");
+                                String[] vehiclesArray = new String[vehiclesList.size()];
+                                vehiclesList.toArray(vehiclesArray);
 
-                            vehicles.setAdapter(vehiclesAdapter);
-                            vehicles.setSelection(vehiclesArray.length-1);
+                                //pushes the array to the spinner
+                                ArrayAdapter vehiclesAdapter = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, vehiclesArray);
+
+                                vehicles.setAdapter(vehiclesAdapter);
+                            } else {
+                                vehiclesList.add("Vehicle");
+                                String[] vehiclesArray = new String[vehiclesList.size()];
+                                vehiclesList.toArray(vehiclesArray);
+                                //pushes the array to the spinner
+                                ArrayAdapter vehiclesAdapter = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, vehiclesArray){
+                                    @Override
+                                    public int getCount() {
+                                        return vehiclesArray.length-1;
+                                    }
+                                };
+
+                                vehicles.setAdapter(vehiclesAdapter);
+                                vehicles.setSelection(vehiclesArray.length-1);
+                            }
 
                             //for bookings through view vehicles activity
                             for(int i = 0; i < vehiclesList.size(); i++){
@@ -132,19 +146,33 @@ public class BookingFragment extends Fragment {
                                 }
                             }
 
-                            driverList.add("Driver");
-                            String[] driversArray = new String[driverList.size()];
-                            driverList.toArray(driversArray);
+                            if(driverList.size() == 0){
+                                drivers.setEnabled(false);
+                                drivers.setClickable(false);
 
-                            //pushes the array to the spinner
-                            ArrayAdapter driverAdapter = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, driversArray){
-                                @Override
-                                public int getCount() {
-                                    return driversArray.length-1;
-                                }
-                            };
-                            drivers.setAdapter(driverAdapter);
-                            drivers.setSelection(driversArray.length-1);
+                                driverList.add("No Drivers Available");
+                                String[] driversArray = new String[driverList.size()];
+                                driverList.toArray(driversArray);
+
+                                //pushes the array to the spinner
+                                ArrayAdapter driversAdapter = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, driversArray);
+
+                                drivers.setAdapter(driversAdapter);
+                            } else {
+                                driverList.add("Driver");
+                                String[] driversArray = new String[driverList.size()];
+                                driverList.toArray(driversArray);
+                                //pushes the array to the spinner
+                                ArrayAdapter driverAdapter = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, driversArray){
+                                    @Override
+                                    public int getCount() {
+                                        return driversArray.length-1;
+                                    }
+                                };
+
+                                drivers.setAdapter(driverAdapter);
+                                drivers.setSelection(driversArray.length-1);
+                            }
                         }
                     }
                 });
@@ -166,13 +194,13 @@ public class BookingFragment extends Fragment {
             public void onClick(View view){
 
                 //form validation
-                if(address.getText().toString().equals("")){
-                    Toast.makeText(getContext(), "Enter an address", Toast.LENGTH_SHORT).show();
+                if(vehicles.getSelectedItem().toString().equals("Vehicle")){
+                    Toast.makeText(getContext(), "Choose a vehicle", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if(vehicles.getSelectedItem().toString().equals("Vehicle")){
-                    Toast.makeText(getContext(), "Choose a vehicle", Toast.LENGTH_SHORT).show();
+                if(vehicles.getSelectedItem().toString().equals("No Vehicles Available")){
+                    Toast.makeText(getContext(), "No Vehicles Available...Please try again later", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -183,6 +211,16 @@ public class BookingFragment extends Fragment {
 
                 if(drivers.getSelectedItem().toString().equals("Driver")){
                     Toast.makeText(getContext(), "Choose a driver", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(vehicles.getSelectedItem().toString().equals("No Drivers Available")){
+                    Toast.makeText(getContext(), "No Drivers Available...Please try again later", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(address.getText().toString().equals("")){
+                    Toast.makeText(getContext(), "Enter an address", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
